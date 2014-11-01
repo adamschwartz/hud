@@ -1,0 +1,21 @@
+@import colors
+
+headerFont = Futura, sans-serif
+uiFont = "Rajdhani", sans-serif
+textFont = "Merriweather", serif
+
+glow(color)
+  text-shadow 0 0 .5em rgba(color, .5)
+
+ui-font()
+  text-transform uppercase
+  letter-spacing .11em
+  font-family uiFont
+  transform scaleY(.85)
+  transform-origin 0 50%
+
+header-font()
+  font-family headerFont
+
+text-font()
+  font-family textFont

@@ -1,0 +1,13 @@
+{
+  "name": "hud",
+  "version": "1.0.0",
+  "private": true,
+  "ignore": [
+    "coffee/",
+    "examples/",
+    "jade/",
+    "styl/",
+    "node_modules/",
+    "test/"
+  ]
+}

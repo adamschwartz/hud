@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    link(href="./css/index.css" rel="stylesheet")
+
+  body
+    .viewport
+      .world
+        .grid
+
+        .welcome
+          .content
+            .ui-text
+              | Welcome
+
+        .hud.top.left
+          .border-slinky
+            - for (var x = 1; x < 10; x++)
+              b
+          .content
+            .ui-text
+              | 150 mph
+
+        .hud.top.right
+          .border-slinky
+            - for (var x = 1; x < 10; x++)
+              b
+          .content
+            .ui-text
+              | 10 min
+
+        .hud.bottom.left
+          .background
+          .border
+          .content
+            .ui-text
+              | 74°F
+
+        .hud.bottom.right
+          .background
+          .border
+          .content
+            .ui-text
+              | 3:42pm
+
+    script(src="./js/index.js")

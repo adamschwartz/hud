@@ -1,0 +1,146 @@
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400);
+@import url(http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700);
+//@import url(http://fonts.googleapis.com/css?family=Khand:300,400,500,600,700)
+//@import url(http://fonts.googleapis.com/css?family=Quicksand:300,400,700);
+
+@import reset
+@import box-sizing-border-box-all
+@import vertical-centering
+@import colors
+@import fonts
+@import body
+
+.viewport
+  perspective 60em
+  height 100%
+  width 100%
+
+  > .world
+    height 100%
+    width 100%
+
+    &, & *
+      transform-style preserve-3d
+
+.grid
+  position fixed
+  top -320em
+  right -320em
+  bottom -320em
+  left -320em
+  margin auto
+  height 320em
+  width 320em
+  background-color darken(neonBlue, 55%)
+  background-image url(../images/matrix-mask-large.png), radial-gradient(transparent, darkness), radial-gradient(transparent, darkness)
+  transform translateZ(-50em)
+
+  //box-shadow 0 0 0 1px green
+
+.welcome
+  vertical-centering-outer()
+  position fixed
+  top 0
+  left 0
+  height 100%
+  width 100%
+  transform translateZ(-5em)
+
+  //box-shadow 0 0 0 1px red
+
+  .content
+    vertical-centering-inner()
+    text-align center
+
+    .ui-text
+      ui-font()
+      color neonBlue
+      glow(@color)
+      font-size 2.5em
+      font-weight 400
+      position relative
+      top -0.15em
+
+.hud
+  position absolute
+
+  &.top
+    top 10%
+
+    // &.left
+    //   transform rotateY(30deg) rotateX(-20deg)
+    //   transform-origin 0 0
+
+    // &.right
+    //   transform rotateY(-30deg) rotateX(-20deg)
+    //   transform-origin 100% 0
+
+  &.bottom
+    bottom 10%
+
+  &.left
+    left 5%
+
+  &.right
+    right 5%
+
+  .background
+    position absolute
+    pointer-events none
+    top 0
+    right 0
+    bottom 0
+    left 0
+    background rgba(neonBlue, .05)
+    border-radius 1.5em
+    transform translateZ(-1em)
+
+  .border
+    position absolute
+    pointer-events none
+    top 0
+    right 0
+    bottom 0
+    left 0
+    border 1px solid rgba(neonBlue, .3)
+    border-radius 1.5em
+    box-shadow inset 0 0 .5em rgba(neonBlue, .15), 0 0 .5em rgba(neonBlue, .15em)
+
+  .border-slinky
+    &, b
+      position absolute
+      pointer-events none
+      top 0
+      right 0
+      bottom 0
+      left 0
+      border-radius 1.5em
+
+    b
+      display block
+      border 1px solid rgba(neonBlue, .2)
+      border-radius 1.5em
+      //box-shadow inset 0 0 2em rgba(neonBlue, .05), 0 0 2em rgba(neonBlue, .05)
+
+      for num in (1..10)
+        &:nth-child({ num })
+          transform translateZ(-(num * .5em))
+          opacity 1 - (num / 10)
+
+  .content
+    text-align center
+    padding .8em 1.6em
+    font-size 2.5em
+
+    transform translateZ(-.75em)
+
+    .ui-text
+      ui-font()
+      color neonBlue
+      glow(@color)
+      font-weight 400
+      position relative
+      top .07em
+
+  &.bottom .content
+    font-size 1.75em
