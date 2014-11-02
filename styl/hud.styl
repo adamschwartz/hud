@@ -1,0 +1,87 @@
+@import nib
+
+@import colors
+@import fonts
+
+.hud
+  position absolute
+
+  &.top
+    top 10%
+
+    // &.left
+    //   transform rotateY(30deg) rotateX(-20deg)
+    //   transform-origin 0 0
+
+    // &.right
+    //   transform rotateY(-30deg) rotateX(-20deg)
+    //   transform-origin 100% 0
+
+  &.bottom
+    bottom 10%
+
+  &.left
+    left 5%
+
+  &.right
+    right 5%
+
+  .background
+    position absolute
+    pointer-events none
+    top 0
+    right 0
+    bottom 0
+    left 0
+    background rgba(neon, .05)
+    border-radius 1.5em
+    transform translateZ(-1em)
+
+  .border
+    position absolute
+    pointer-events none
+    top 0
+    right 0
+    bottom 0
+    left 0
+    border 1px solid rgba(neon, .3)
+    border-radius 1.5em
+    box-shadow inset 0 0 .5em rgba(neon, .15), 0 0 .5em rgba(neon, .15em)
+
+  .border-slinky
+    &, b
+      position absolute
+      pointer-events none
+      top 0
+      right 0
+      bottom 0
+      left 0
+      border-radius 1.5em
+
+    b
+      display block
+      border 1px solid rgba(neon, .1)
+      border-radius 1.5em
+
+      for num in (1..100)
+        &:nth-child({ num })
+          transform translateZ(-(num * .5em))
+          opacity 1 - (num / 100)
+
+  .content
+    text-align center
+    padding .8em 1.6em
+    font-size 2.5em
+
+    transform translateZ(-.75em)
+
+    .ui-text
+      ui-font()
+      color neon
+      glow(@color)
+      font-weight 400
+      position relative
+      top .07em
+
+  &.bottom .content
+    font-size 1.75em

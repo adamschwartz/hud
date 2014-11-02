@@ -69,16 +69,17 @@ viewportElement = document.querySelector '.viewport'
 viewport = new Viewport viewportElement
 world = new World viewportElement.children[0], viewport
 
-mouseX = 0
-mouseY = 0
+# TODO - provide API instead of assigning to window
+window.mouseX = 0
+window.mouseY = 0
 
 paused = false
 
 window.addEventListener 'dblclick', -> paused = not paused
 
 window.addEventListener 'mousemove', (event) ->
-  mouseX = event.x
-  mouseY = event.y
+  window.mouseX = event.x
+  window.mouseY = event.y
 
 ease = (host, property, target, amount = 20) ->
   host[property] += (target - host[property]) / amount

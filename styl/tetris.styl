@@ -1,0 +1,206 @@
+@import nib
+
+@import colors
+@import fonts
+
+#tetris
+  position absolute
+  top 0
+  right 0
+  left 0
+  bottom 0
+  margin auto
+  height 604px
+  //width 606px
+  //padding-left 152px
+  width 454px
+  border-radius 1.5em 1.5em 1.5em 0
+  overflow hidden
+
+  .tetris-brick
+    position relative
+
+    b
+      position absolute
+      top 0
+      right 0
+      bottom 0
+      left 0
+      display block
+      border 1px solid rgba(neon, .1)
+
+      //border-radius 100px
+      border-radius 100px
+
+      for num in (1..10)
+        &:nth-child({ num })
+          transform translateZ(-(num * 2em))
+          opacity 1 - (num / 10)
+
+    // &.blue
+    //   background rgba(neonBlue, .75)
+    //   //box-shadow inset 0 0 0 2px rgba(neonBlue, .5)
+
+    // &.white
+    //   background rgba(neon, .75)
+    //   //box-shadow inset 0 0 0 2px rgba(neon, .5)
+
+    // &.red
+    //   background rgba(neonRed, .75)
+    //   //box-shadow inset 0 0 0 2px rgba(neonRed, .5)
+
+    // &.green
+    //   background rgba(neonGreen, .75)
+    //   //box-shadow inset 0 0 0 2px rgba(neonGreen, .5)
+
+    // &.orange
+    //   background rgba(neonOrange, .75)
+    //   //box-shadow inset 0 0 0 2px rgba(neonOrange, .5)
+
+    // &.yellow
+    //   background rgba(neonYellow, .75)
+    //   //box-shadow inset 0 0 0 2px rgba(neonYellow, .5)
+
+    // &.pink
+    //   background rgba(neonPink, .75)
+    //   //box-shadow inset 0 0 0 2px rgba(neonPink, .5)
+
+    &.blue b
+      box-shadow inset 0 0 0 2px rgba(neonBlue, .5)
+
+    &.white b
+      box-shadow inset 0 0 0 2px rgba(neon, .5)
+
+    &.red b
+      box-shadow inset 0 0 0 2px rgba(neonRed, .5)
+
+    &.green b
+      box-shadow inset 0 0 0 2px rgba(neonGreen, .5)
+
+    &.orange b
+      box-shadow inset 0 0 0 2px rgba(neonOrange, .5)
+
+    &.yellow b
+      box-shadow inset 0 0 0 2px rgba(neonYellow, .5)
+
+    &.pink b
+      box-shadow inset 0 0 0 2px rgba(neonPink, .5)
+
+  dt, dd
+    ui-font()
+    color neon
+    glow(@color)
+    font-weight 400
+    font-size .8em
+    position relative
+    top .07em
+
+  *
+    background-color transparent
+    border none
+    font-size 1em
+    font-weight inherit
+    line-height 1.4em
+    list-style none inside
+    margin 0
+    padding 0
+    text-align inherit
+    text-decoration none
+
+  .clear
+    clear both
+
+  #tetris a:link, #tetris a:hover, #tetris a:active, #tetris a:visited
+    color #202
+    text-decoration underline
+
+  #tetris-wrap
+    position relative
+    text-align right
+
+  #tetris-wrap-inner
+    clearfix()
+    border 1px solid rgba(darken(neon, 60%), .6)
+    margin-bottom .2em
+    border-radius 1.5em 1.5em 1.5em 0
+
+  #tetris-main, #tetris-overlay, #tetris-side
+    height 600px
+
+  #tetris-main, #tetris-overlay
+    width 300px
+
+  #tetris-main
+    background rgba(darken(neon, 60%), .05)
+    float left
+    overflow hidden
+    position relative
+
+  #tetris-overlay
+    position absolute
+    display table
+
+  #tetris-message
+    font-size 2em
+    text-align center
+    text-transform uppercase
+    transition opacity .25s
+
+    display table-cell
+    vertical-align middle
+    background rgba(0, 0, 0, 0.5)
+    border-radius 1.5em 0 0 0
+
+    &:empty
+      opacity 0
+
+    p
+      ui-font()
+      color neon
+      glow(@color)
+      font-weight 400
+      position relative
+      text-transform uppercase
+      top .07em
+      padding .5em
+
+      span
+        display block
+        font-size .5em
+
+  #tetris-side
+    background rgba(darken(neon, 60%), .2)
+    border-radius 0 1.5em 1.5em 0
+    float right
+    text-align left
+    width 152px
+    dl
+      clear both
+    dt
+      float left
+    dd
+      float right
+
+  #tetris-side-inner
+    padding 16px
+
+  dd#tetris-level, dd#tetris-score
+    margin-bottom 1em
+
+  #tetris-scores, #tetris-keys
+    clearfix()
+
+  #tetris-next
+    background rgba(darken(neon, 90%), .25)
+    position relative
+    height 120px
+    margin-bottom 1em
+    width 120px
+
+  #tetris-keys
+    color #979
+    font-size .8em
+    margin-top 1em
+
+  #tetris-copyright
+    font-size .8em
