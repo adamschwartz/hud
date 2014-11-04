@@ -1336,7 +1336,6 @@ body {
   width: 454px;
   -webkit-border-radius: 1.5em 1.5em 1.5em 0;
   border-radius: 1.5em 1.5em 1.5em 0;
-  overflow: hidden;
 }
 #tetris .tetris-brick {
   position: relative;
@@ -1352,133 +1351,40 @@ body {
   -webkit-border-radius: 100px;
   border-radius: 100px;
 }
-#tetris .tetris-brick b:nth-child(1) {
-  -webkit-transform: translateZ(-2em);
-  -moz-transform: translateZ(-2em);
-  -o-transform: translateZ(-2em);
-  -ms-transform: translateZ(-2em);
-  transform: translateZ(-2em);
-  opacity: 0.9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-  filter: alpha(opacity=90);
-}
 #tetris .tetris-brick b:nth-child(2) {
-  -webkit-transform: translateZ(-4em);
-  -moz-transform: translateZ(-4em);
-  -o-transform: translateZ(-4em);
-  -ms-transform: translateZ(-4em);
-  transform: translateZ(-4em);
-  opacity: 0.8;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-  filter: alpha(opacity=80);
-}
-#tetris .tetris-brick b:nth-child(3) {
-  -webkit-transform: translateZ(-6em);
-  -moz-transform: translateZ(-6em);
-  -o-transform: translateZ(-6em);
-  -ms-transform: translateZ(-6em);
-  transform: translateZ(-6em);
-  opacity: 0.7;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-  filter: alpha(opacity=70);
-}
-#tetris .tetris-brick b:nth-child(4) {
-  -webkit-transform: translateZ(-8em);
-  -moz-transform: translateZ(-8em);
-  -o-transform: translateZ(-8em);
-  -ms-transform: translateZ(-8em);
-  transform: translateZ(-8em);
-  opacity: 0.6;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-  filter: alpha(opacity=60);
-}
-#tetris .tetris-brick b:nth-child(5) {
-  -webkit-transform: translateZ(-10em);
-  -moz-transform: translateZ(-10em);
-  -o-transform: translateZ(-10em);
-  -ms-transform: translateZ(-10em);
-  transform: translateZ(-10em);
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-#tetris .tetris-brick b:nth-child(6) {
-  -webkit-transform: translateZ(-12em);
-  -moz-transform: translateZ(-12em);
-  -o-transform: translateZ(-12em);
-  -ms-transform: translateZ(-12em);
-  transform: translateZ(-12em);
-  opacity: 0.4;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-  filter: alpha(opacity=40);
-}
-#tetris .tetris-brick b:nth-child(7) {
-  -webkit-transform: translateZ(-14em);
-  -moz-transform: translateZ(-14em);
-  -o-transform: translateZ(-14em);
-  -ms-transform: translateZ(-14em);
-  transform: translateZ(-14em);
-  opacity: 0.3;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-  filter: alpha(opacity=30);
-}
-#tetris .tetris-brick b:nth-child(8) {
-  -webkit-transform: translateZ(-16em);
-  -moz-transform: translateZ(-16em);
-  -o-transform: translateZ(-16em);
-  -ms-transform: translateZ(-16em);
-  transform: translateZ(-16em);
-  opacity: 0.2;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
-  filter: alpha(opacity=20);
-}
-#tetris .tetris-brick b:nth-child(9) {
-  -webkit-transform: translateZ(-18em);
-  -moz-transform: translateZ(-18em);
-  -o-transform: translateZ(-18em);
-  -ms-transform: translateZ(-18em);
-  transform: translateZ(-18em);
-  opacity: 0.1;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
-  filter: alpha(opacity=10);
-}
-#tetris .tetris-brick b:nth-child(10) {
-  -webkit-transform: translateZ(-20em);
-  -moz-transform: translateZ(-20em);
-  -o-transform: translateZ(-20em);
-  -ms-transform: translateZ(-20em);
-  transform: translateZ(-20em);
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
+  -webkit-transform: translateZ(-1em);
+  -moz-transform: translateZ(-1em);
+  -o-transform: translateZ(-1em);
+  -ms-transform: translateZ(-1em);
+  transform: translateZ(-1em);
 }
 #tetris .tetris-brick.blue b {
-  -webkit-box-shadow: inset 0 0 0 2px rgba(135,208,240,0.5);
-  box-shadow: inset 0 0 0 2px rgba(135,208,240,0.5);
+  -webkit-box-shadow: inset 0 0 0 2px rgba(135,208,240,0.4);
+  box-shadow: inset 0 0 0 2px rgba(135,208,240,0.4);
 }
 #tetris .tetris-brick.white b {
-  -webkit-box-shadow: inset 0 0 0 2px rgba(195,226,223,0.5);
-  box-shadow: inset 0 0 0 2px rgba(195,226,223,0.5);
+  -webkit-box-shadow: inset 0 0 0 2px rgba(195,226,223,0.4);
+  box-shadow: inset 0 0 0 2px rgba(195,226,223,0.4);
 }
 #tetris .tetris-brick.red b {
-  -webkit-box-shadow: inset 0 0 0 2px rgba(255,135,135,0.5);
-  box-shadow: inset 0 0 0 2px rgba(255,135,135,0.5);
+  -webkit-box-shadow: inset 0 0 0 2px rgba(255,135,135,0.4);
+  box-shadow: inset 0 0 0 2px rgba(255,135,135,0.4);
 }
 #tetris .tetris-brick.green b {
-  -webkit-box-shadow: inset 0 0 0 2px rgba(116,236,135,0.5);
-  box-shadow: inset 0 0 0 2px rgba(116,236,135,0.5);
+  -webkit-box-shadow: inset 0 0 0 2px rgba(116,236,135,0.4);
+  box-shadow: inset 0 0 0 2px rgba(116,236,135,0.4);
 }
 #tetris .tetris-brick.orange b {
-  -webkit-box-shadow: inset 0 0 0 2px rgba(255,180,117,0.5);
-  box-shadow: inset 0 0 0 2px rgba(255,180,117,0.5);
+  -webkit-box-shadow: inset 0 0 0 2px rgba(255,180,117,0.4);
+  box-shadow: inset 0 0 0 2px rgba(255,180,117,0.4);
 }
 #tetris .tetris-brick.yellow b {
-  -webkit-box-shadow: inset 0 0 0 2px rgba(232,227,124,0.5);
-  box-shadow: inset 0 0 0 2px rgba(232,227,124,0.5);
+  -webkit-box-shadow: inset 0 0 0 2px rgba(232,227,124,0.4);
+  box-shadow: inset 0 0 0 2px rgba(232,227,124,0.4);
 }
 #tetris .tetris-brick.pink b {
-  -webkit-box-shadow: inset 0 0 0 2px rgba(228,149,228,0.5);
-  box-shadow: inset 0 0 0 2px rgba(228,149,228,0.5);
+  -webkit-box-shadow: inset 0 0 0 2px rgba(228,149,228,0.4);
+  box-shadow: inset 0 0 0 2px rgba(228,149,228,0.4);
 }
 #tetris dt,
 #tetris dd {
@@ -1555,7 +1461,6 @@ body {
 #tetris #tetris-main {
   background: rgba(55,114,108,0.05);
   float: left;
-  overflow: hidden;
   position: relative;
 }
 #tetris #tetris-overlay {

@@ -252,7 +252,7 @@ var
       brick.className = 'tetris-brick ' + color
       brick.setAttribute('style', 'height: ' + ( tetris.brickSize) + 'px; left: 0; top: 0; width: ' + ( tetris.brickSize ) + 'px; position: absolute;');
 
-      brick.innerHTML = '<b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b>'
+      brick.innerHTML = '<b></b><b></b>'
 
       return brick;
     },

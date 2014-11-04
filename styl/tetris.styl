@@ -15,7 +15,6 @@
   //padding-left 152px
   width 454px
   border-radius 1.5em 1.5em 1.5em 0
-  overflow hidden
 
   .tetris-brick
     position relative
@@ -32,10 +31,14 @@
       //border-radius 100px
       border-radius 100px
 
-      for num in (1..10)
-        &:nth-child({ num })
-          transform translateZ(-(num * 2em))
-          opacity 1 - (num / 10)
+      // for num in (1..10)
+      //   &:nth-child({ num })
+      //     transform translateZ(-(num * .25em))
+      //     opacity 1 - (num / 10)
+
+      &:nth-child(2)
+        transform translateZ(-1em)
+
 
     // &.blue
     //   background rgba(neonBlue, .75)
@@ -66,25 +69,25 @@
     //   //box-shadow inset 0 0 0 2px rgba(neonPink, .5)
 
     &.blue b
-      box-shadow inset 0 0 0 2px rgba(neonBlue, .5)
+      box-shadow inset 0 0 0 2px rgba(neonBlue, .4)
 
     &.white b
-      box-shadow inset 0 0 0 2px rgba(neon, .5)
+      box-shadow inset 0 0 0 2px rgba(neon, .4)
 
     &.red b
-      box-shadow inset 0 0 0 2px rgba(neonRed, .5)
+      box-shadow inset 0 0 0 2px rgba(neonRed, .4)
 
     &.green b
-      box-shadow inset 0 0 0 2px rgba(neonGreen, .5)
+      box-shadow inset 0 0 0 2px rgba(neonGreen, .4)
 
     &.orange b
-      box-shadow inset 0 0 0 2px rgba(neonOrange, .5)
+      box-shadow inset 0 0 0 2px rgba(neonOrange, .4)
 
     &.yellow b
-      box-shadow inset 0 0 0 2px rgba(neonYellow, .5)
+      box-shadow inset 0 0 0 2px rgba(neonYellow, .4)
 
     &.pink b
-      box-shadow inset 0 0 0 2px rgba(neonPink, .5)
+      box-shadow inset 0 0 0 2px rgba(neonPink, .4)
 
   dt, dd
     ui-font()
@@ -133,7 +136,6 @@
   #tetris-main
     background rgba(darken(neon, 60%), .05)
     float left
-    overflow hidden
     position relative
 
   #tetris-overlay
