@@ -1,0 +1,22 @@
+@import nib
+
+.animate-letters
+
+  > span
+    opacity 0
+    transform rotateX(90deg) translate3d(0, 0, 0)
+    animation-name animate-letters-fadein
+    animation-duration 0.5s
+    animation-fill-mode forwards
+
+    for num in (1..100)
+      &:nth-child({ num })
+        animation-delay (.05 * num)s
+
+  &.animate-out span
+    animation-direction reverse
+
+@keyframes animate-letters-fadein
+  to
+    opacity 1
+    transform rotateX(0deg) translate3d(0, 0, 0)

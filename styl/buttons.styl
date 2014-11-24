@@ -1,0 +1,57 @@
+@import nib
+
+@import colors
+@import fonts
+
+.button
+  transition all .3s
+  display inline-block
+  cursor pointer
+  border 0
+  text-align center
+  padding 1em 1.5em .9em
+  background rgba(darken(neon, 60%), .2)
+  margin 0
+  line-height .8
+  position relative
+
+  &[disabled]
+    opacity .25
+
+  *
+    pointer-events none
+
+  // &:after
+  //   content ""
+  //   position absolute
+  //   top -.25em
+  //   right -.25em
+  //   bottom -.25em
+  //   left -.25em
+  //   background rgba(neon, .001)
+  //   transition all .3s
+
+  // &:focus:before
+  //   transition all .2s
+  //   content ""
+  //   position absolute
+  //   top -.25em
+  //   right -.25em
+  //   bottom -.25em
+  //   left -.25em
+  //   z-index -1
+  //   pointer-event none
+  //   border 1px solid rgba(neon, .3)
+  //   box-shadow inset 0 0 .5em rgba(neon, .15), 0 0 .5em rgba(neon, .15em)
+
+  &:active
+    transform translateZ(-8em)
+
+    // &:focus:before
+    //   opacity 0
+
+    // &:after
+    //   transform translateZ(8em)
+
+.buttons .button
+  margin 1em

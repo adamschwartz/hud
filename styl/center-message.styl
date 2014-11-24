@@ -4,7 +4,15 @@
 @import colors
 @import fonts
 
-.welcome
+.center-messages
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  pointer-events none
+
+.center-message
   vertical-centering-outer()
   position fixed
   top 0
@@ -26,5 +34,8 @@
       position relative
       top -0.15em
 
-.welcome
-  opacity 0
+    .button
+      pointer-events all
+
+    .button .ui-text
+      top 0

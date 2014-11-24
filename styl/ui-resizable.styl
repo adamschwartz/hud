@@ -1,0 +1,25 @@
+@import nib
+
+.ui-resizable-handle
+  position absolute
+
+  &.ui-resizable-e
+    top 0
+    left 100%
+    height 100%
+    width .25em
+    cursor ew-resize
+
+  &.ui-resizable-s
+    top 100%
+    left 0
+    width 100%
+    height .25em
+    cursor ns-resize
+
+  &.ui-resizable-se
+    top 100%
+    left 100%
+    height .5em
+    width .5em
+    cursor nwse-resize

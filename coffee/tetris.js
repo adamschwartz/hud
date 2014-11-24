@@ -1,5 +1,10 @@
 // From http://alias.io/tetris/
 
+// TODO - zone shit
+var isActiveZone = function() {
+  return window.zoneX === 1 && window.zoneY === 0;
+};
+
 var
   tetris = {
     brickSize:       30,
@@ -34,13 +39,31 @@ var
 
     init: function()
     {
+      tetris.wrap = document.getElementById('tetris-wrap');
       tetris.mainWin = document.getElementById('tetris-main');
       tetris.nextWin = document.getElementById('tetris-next-inner');
       tetris.message = document.getElementById('tetris-message');
 
-      tetris.message.innerHTML = '<p>New game <span>Press any key to start</span></p>';
+      if (!tetris.mainWin) {
+        return;
+      }
+
+      tetris.setMessage('New game <small>Press any key to start</small>');
 
       document.onkeydown = tetris.keyListener;
+    },
+
+    setMessage: function(str, notModal)
+    {
+      tetris.message.innerHTML = str;
+
+      if (!notModal) {
+        if (str !== '') {
+          tetris.wrap.setAttribute('with-message-showing', null);
+        } else {
+          tetris.wrap.removeAttribute('with-message-showing');
+        }
+      }
     },
 
     newGame: function()
@@ -108,7 +131,7 @@ var
         ;
 
       brick.className = 'tetris-brick ' + color
-      brick.setAttribute('style', 'height: ' + ( tetris.brickSize) + 'px; left: 0; top: 0; width: ' + ( tetris.brickSize ) + 'px; position: absolute;');
+      brick.setAttribute('style', 'height: ' + ( tetris.brickSize / 16 ) + 'em; left: 0; top: 0; width: ' + ( tetris.brickSize / 16 ) + 'em; position: absolute;');
 
       brick.innerHTML = '<b></b><b></b>'
 
@@ -123,6 +146,11 @@ var
         ;
 
       tetris.brickPos = [];
+
+      // TODO - zone shit
+      if (!isActiveZone()) {
+        return;
+      }
 
       // TODO - REMOVE HACK
       window.mouseX = (window.innerWidth / 2) + 2 * ((window.innerWidth / tetris.mainWinWidth) * (tetris.shapePosHor + 2 - tetris.mainWinWidth / 2))
@@ -147,7 +175,7 @@ var
         }
       }
 
-      if ( move && !tetris.paused && !tetris.gameOver )
+      if ( move && !tetris.paused && !tetris.gameOver && isActiveZone() )
       {
         var prevBricks = tetris.bricks ? tetris.bricks.slice(0) : false;
 
@@ -159,8 +187,8 @@ var
 
           tetris.bricks[i].num = tetris.shapeCount;
 
-          tetris.bricks[i].style.left = tetris.brickPos[i].hor * tetris.brickSize + 'px';
-          tetris.bricks[i].style.top  = tetris.brickPos[i].ver * tetris.brickSize + 'px';
+          tetris.bricks[i].style.left = (tetris.brickPos[i].hor * tetris.brickSize) / 16 + 'em';
+          tetris.bricks[i].style.top  = (tetris.brickPos[i].ver * tetris.brickSize) / 16 + 'em';
         }
 
         for ( var i = 0; i < brickCount; i ++ ) // Using seperate for-loops to reduce flickering
@@ -207,8 +235,8 @@ var
               tetris.brickLib[tetris.shapeNumNext][64]
               );
 
-            brick.style.left = hor * tetris.brickSize + 'px';
-            brick.style.top  = ver * tetris.brickSize + 'px';
+            brick.style.left = (hor * tetris.brickSize) / 16 + 'em';
+            brick.style.top  = (ver * tetris.brickSize) / 16 + 'em';
 
             tetris.nextWin.appendChild(brick);
           }
@@ -327,6 +355,12 @@ var
 
                 setTimeout('tetris.mainWin.removeChild(tetris.pileAnimLine[' + hor + '][' + ver + ']);', hor * 50);
 
+                (function(hor, ver){
+                  setTimeout(function(){
+                    tetris.mainWin.removeChild(tetris.pileAnimLine[hor][ver]);
+                  }, hor * 50);
+                })(hor, ver);
+
                 tetris.pile[hor][ver] = false;
               }
             }
@@ -340,7 +374,11 @@ var
                 {
                   tetris.pileAnimDrop[hor][ver2] = tetris.pile[hor][ver2];
 
-                  setTimeout('tetris.pileAnimDrop[' + hor + '][' + ver2 + '].style.top = ( ' + ver2 + ' + 1 ) * tetris.brickSize + \'px\';', tetris.mainWinWidth * 50);
+                  (function(hor, ver2){
+                    setTimeout(function(){
+                      tetris.pileAnimDrop[hor][ver2].style.top = ((ver2 + 1) * tetris.brickSize) / 16 + 'em';
+                    }, tetris.mainWinWidth * 50);
+                  })(hor, ver2);
 
                   tetris.pile[hor][ver2 + 1] = tetris.pile[hor][ver2];
                   tetris.pile[hor][ver2]     = false;
@@ -394,7 +432,7 @@ var
 
       if ( lines == 2 )
       {
-        tetris.flashMessage('<p class="tetris-double">Double!</p>');
+        tetris.flashMessage('Double!');
 
         tetris.doubles ++;
 
@@ -403,7 +441,7 @@ var
 
       if ( lines == 3 )
       {
-        tetris.flashMessage('<p class="tetris-double">Triple!</p>');
+        tetris.flashMessage('Triple!');
 
         tetris.triples ++;
 
@@ -412,7 +450,7 @@ var
 
       if ( lines == 4 )
       {
-        tetris.flashMessage('<p class="tetris-double">Tetris!</p>');
+        tetris.flashMessage('Tetris!');
 
         tetris.quads ++;
 
@@ -422,16 +460,18 @@ var
 
     flashMessage: function(message)
     {
-      tetris.message.innerHTML = message;
+      tetris.setMessage(message, false);
 
-      setTimeout('tetris.message.innerHTML = \'\';', 1000);
+      setTimeout(function(){
+        tetris.setMessage('');
+      }, 1000);
     },
 
     doGameOver: function()
     {
       clearInterval(tetris.intval);
 
-      tetris.message.innerHTML = '<p>Game over <span>Press Spacebar to continue</span</p>';
+      tetris.setMessage('Game over <br><small>Press Spacebar to continue</small>');
 
       tetris.gameOver = true;
     },
@@ -445,11 +485,11 @@ var
 
       tetris.keyPressed = e.keyCode;
 
-      if ( tetris.gameStart )
+      if ( tetris.gameStart && isActiveZone()) // TODO - this fucking sucks
       {
         tetris.gameStart = false;
 
-        tetris.message.innerHTML = '';
+        tetris.setMessage('');
 
         tetris.newGame();
       }
@@ -459,7 +499,7 @@ var
         {
           tetris.gameOver = false;
 
-          tetris.message.innerHTML = '';
+          tetris.setMessage('');
 
           tetris.newGame();
         }
@@ -471,17 +511,17 @@ var
 
             if ( tetris.paused )
             {
-              tetris.message.innerHTML = '<p>Paused <span>Press Esc to resume</span</p>';
+              tetris.setMessage('Paused <br><small>Press Esc to resume</small>');
             }
             else
             {
-              tetris.message.innerHTML = '';
+              tetris.setMessage('');
             }
 
             return false;
           }
 
-          if ( !tetris.paused )
+          if ( !tetris.paused && isActiveZone() )
           {
             if ( e.keyCode == tetris.keyDrop )
             {

@@ -9,82 +9,121 @@ html
       .world
         .grid
 
-        .welcome
-          .content
-            .ui-text
-              | Welcome
+        .zones
+          .zone(data-zoneX="0" data-zoneY="-1")
+            .clock
+              .progress-circle.seconds(data-progress="0")
+                .ring-half-outer
+                  .ring-half
+                    .progress
+                .ring-half-outer
+                  .ring-half
+                    .progress
 
-        .hud.top.left
-          .border-slinky
-            - for (var x = 1; x < 100; x++)
-              b
-          .content
-            .ui-text
-              | 150 mph
+              .progress-circle.minutes(data-progress="0")
+                .ring-half-outer
+                  .ring-half
+                    .progress
+                .ring-half-outer
+                  .ring-half
+                    .progress
 
-        .hud.top.right
-          .border-slinky
-            - for (var x = 1; x < 100; x++)
-              b
-          .content
-            .ui-text
-              | 10 min
+              .progress-circle.hours(data-progress="0")
+                .ring-half-outer
+                  .ring-half
+                    .progress
+                .ring-half-outer
+                  .ring-half
+                    .progress
 
-        .hud.bottom.left
-          .background
-          .border
-          .content
-            .ui-text
-              | 74°F
+            //- .hud.top.left
+            //-   .border-slinky
+            //-     - for (var x = 1; x < 100; x++)
+            //-       b
+            //-   .content
+            //-     .ui-text
+            //-       | 150 mph
 
-        .hud.bottom.right
-          .background
-          .border
-          .content
-            .ui-text
-              | 3:42pm
+            .hud.top.right
+              .border-slinky
+                - for (var x = 1; x < 100; x++)
+                  b
+              .content
+                .ui-text
+                  | 10 min
 
-        #tetris
-          #tetris-wrap
-            #tetris-wrap-inner
-              #tetris-main
-              #tetris-overlay
-                #tetris-message
-              #tetris-side
-                #tetris-side-inner
-                  #tetris-next
-                    #tetris-next-inner
-                  #tetris-scores
-                    dl
-                      dt Level
-                      dd#tetris-level 1
-                    dl
-                      dt Score
-                      dd#tetris-score 0
-                    dl
-                      dt Singles
-                      dd#tetris-singles 0
-                    dl
-                      dt Doubles
-                      dd#tetris-doubles 0
-                    dl
-                      dt Triples
-                      dd#tetris-triples 0
-                    dl
-                      dt Tetris
-                      dd#tetris-quads 0
-                  #tetris-keys
-                    dl
-                      dt Move
-                      dd ← ↓ →
-                    dl
-                      dt Rotate
-                      dd ↑
-                    dl
-                      dt Drop
-                      dd Spacebar
-                    dl
-                      dt Pause
-                      dd Pause/Esc
+            .hud.bottom.left
+              .background
+              .border
+              .content
+                .ui-text
+                  | 74°F
+
+            .hud.bottom.right
+              .background
+              .border
+              .content
+                .ui-text
+                  | 3:42pm
+
+          .zone(data-zoneX="0" data-zoneY="0")
+            .center-messages
+
+          .zone(data-zoneX="1" data-zoneY="0")
+            //- TODO - move into tower
+            #tetris
+              .center-messages
+                .message
+                .center-message
+                  .content
+                    .ui-text#tetris-message
+
+              #tetris-wrap
+                #tetris-wrap-inner
+                  #tetris-main
+                  #tetris-side
+                    #tetris-side-inner
+                      #tetris-next
+                        #tetris-next-inner
+                      #tetris-scores
+                        .tetris-side-section
+                          dl
+                            dt Level
+                            dd#tetris-level 1
+                        .tetris-side-section
+                          dl
+                            dt Score
+                            dd#tetris-score 0
+                        .tetris-side-section
+                          dl
+                            dt Singles
+                            dd#tetris-singles 0
+                          dl
+                            dt Doubles
+                            dd#tetris-doubles 0
+                          dl
+                            dt Triples
+                            dd#tetris-triples 0
+                          dl
+                            dt Tetris
+                            dd#tetris-quads 0
+
+                        .tetris-side-section#tetris-keys
+                          dl
+                            dt Move
+                            dd ← ↓ →
+                          dl
+                            dt Rotate
+                            dd ↑
+                          dl
+                            dt Drop
+                            dd Spacebar
+                          dl
+                            dt Pause
+                            dd Pause/Esc
 
     script(src="./js/index.js")
+
+    //- TODO
+    //- http://pep.briangonzalez.org
+    //- http://quojs.tapquo.com

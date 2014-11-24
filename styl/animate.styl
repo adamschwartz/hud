@@ -1,0 +1,27 @@
+@import nib
+
+.animate-fade-in
+  opacity 0
+  animation-name animate-fade-in
+  animation-duration 0.5s
+  animation-fill-mode forwards
+
+@keyframes animate-fade-in
+  to
+    opacity 1
+
+.animate-blur-out
+  animation-name animate-blur-out
+  animation-duration 1s
+  animation-fill-mode forwards
+
+@keyframes animate-blur-out
+  to
+    -webkit-filter blur(.5em)
+    transform translateZ(-10em)
+    opacity 0
+
+.animate-in-dominos
+  for num in (1..100)
+    &:nth-child({ num })
+      animation-delay (.05 * num)s

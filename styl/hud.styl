@@ -9,13 +9,15 @@
   &.top
     top 10%
 
-    // &.left
-    //   transform rotateY(30deg) rotateX(-20deg)
-    //   transform-origin 0 0
+    &.angled-in
 
-    // &.right
-    //   transform rotateY(-30deg) rotateX(-20deg)
-    //   transform-origin 100% 0
+      &.left
+        transform rotateY(30deg) rotateX(-20deg)
+        transform-origin 0 0
+
+      &.right
+        transform rotateY(-30deg) rotateX(-20deg)
+        transform-origin 100% 0
 
   &.bottom
     bottom 10%

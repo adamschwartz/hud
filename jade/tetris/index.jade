@@ -1,0 +1,55 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    link(href="../css/index.css" rel="stylesheet")
+
+  body
+    .viewport
+      .world
+        .grid
+
+        #tetris
+          #tetris-wrap
+            #tetris-wrap-inner
+              #tetris-main
+              #tetris-overlay
+                #tetris-message
+              #tetris-side
+                #tetris-side-inner
+                  #tetris-next
+                    #tetris-next-inner
+                  #tetris-scores
+                    dl
+                      dt Level
+                      dd#tetris-level 1
+                    dl
+                      dt Score
+                      dd#tetris-score 0
+                    dl
+                      dt Singles
+                      dd#tetris-singles 0
+                    dl
+                      dt Doubles
+                      dd#tetris-doubles 0
+                    dl
+                      dt Triples
+                      dd#tetris-triples 0
+                    dl
+                      dt Tetris
+                      dd#tetris-quads 0
+                  #tetris-keys
+                    dl
+                      dt Move
+                      dd ← ↓ →
+                    dl
+                      dt Rotate
+                      dd ↑
+                    dl
+                      dt Drop
+                      dd Spacebar
+                    dl
+                      dt Pause
+                      dd Pause/Esc
+
+    script(src="../js/index.js")

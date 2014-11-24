@@ -1,5 +1,11 @@
 @import nib
 
+for num in (1..200)
+  sizeQuery = "(min-width: " + num + "em) and (min-height: " + (num * (9 / 16)) + "em)"
+  @media sizeQuery
+    html
+      font-size (num / 80)em
+
 .viewport
   perspective 60em
   height 100%
