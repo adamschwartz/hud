@@ -2,6 +2,10 @@
 
 // TODO - zone shit
 var isActiveZone = function() {
+  if (!document.querySelector('.zones')) {
+    return true;
+  }
+
   return window.zoneX === 1 && window.zoneY === 0;
 };
 
@@ -48,7 +52,7 @@ var
         return;
       }
 
-      tetris.setMessage('New game <small>Press any key to start</small>');
+      tetris.setMessage('New game<br><small>Press any key to start</small>');
 
       document.onkeydown = tetris.keyListener;
     },
@@ -464,14 +468,14 @@ var
 
       setTimeout(function(){
         tetris.setMessage('');
-      }, 1000);
+      }, 500);
     },
 
     doGameOver: function()
     {
       clearInterval(tetris.intval);
 
-      tetris.setMessage('Game over <br><small>Press Spacebar to continue</small>');
+      tetris.setMessage('Game over<br><small>Press Spacebar to continue</small>');
 
       tetris.gameOver = true;
     },
@@ -511,7 +515,7 @@ var
 
             if ( tetris.paused )
             {
-              tetris.setMessage('Paused <br><small>Press Esc to resume</small>');
+              tetris.setMessage('Paused<br><small>Press Esc to resume</small>');
             }
             else
             {

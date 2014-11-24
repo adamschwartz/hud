@@ -10,46 +10,54 @@ html
         .grid
 
         #tetris
+          .center-messages
+            .message
+            .center-message
+              .content
+                .ui-text#tetris-message
+
           #tetris-wrap
             #tetris-wrap-inner
               #tetris-main
-              #tetris-overlay
-                #tetris-message
               #tetris-side
                 #tetris-side-inner
                   #tetris-next
                     #tetris-next-inner
                   #tetris-scores
-                    dl
-                      dt Level
-                      dd#tetris-level 1
-                    dl
-                      dt Score
-                      dd#tetris-score 0
-                    dl
-                      dt Singles
-                      dd#tetris-singles 0
-                    dl
-                      dt Doubles
-                      dd#tetris-doubles 0
-                    dl
-                      dt Triples
-                      dd#tetris-triples 0
-                    dl
-                      dt Tetris
-                      dd#tetris-quads 0
-                  #tetris-keys
-                    dl
-                      dt Move
-                      dd ← ↓ →
-                    dl
-                      dt Rotate
-                      dd ↑
-                    dl
-                      dt Drop
-                      dd Spacebar
-                    dl
-                      dt Pause
-                      dd Pause/Esc
+                    .tetris-side-section
+                      dl
+                        dt Level
+                        dd#tetris-level 1
+                    .tetris-side-section
+                      dl
+                        dt Score
+                        dd#tetris-score 0
+                    .tetris-side-section
+                      dl
+                        dt Singles
+                        dd#tetris-singles 0
+                      dl
+                        dt Doubles
+                        dd#tetris-doubles 0
+                      dl
+                        dt Triples
+                        dd#tetris-triples 0
+                      dl
+                        dt Tetris
+                        dd#tetris-quads 0
+
+                    .tetris-side-section#tetris-keys
+                      dl
+                        dt Move
+                        dd ← ↓ →
+                      dl
+                        dt Rotate
+                        dd ↑
+                      dl
+                        dt Drop
+                        dd Spacebar
+                      dl
+                        dt Pause
+                        dd Pause/Esc
 
     script(src="../js/index.js")

@@ -25658,7 +25658,7 @@ function handler(event) {
 
   dom = function() {
     return dom = {
-      messagesEl: document.querySelector('.center-messages'),
+      messagesEl: document.querySelector('#main-center-messages'),
       clock: document.querySelector('.clock')
     };
   };
@@ -25729,9 +25729,9 @@ function handler(event) {
     if (!dom.messagesEl) {
       return;
     }
-    message('One day');
+    message('Welcome');
     return delay(2, function() {
-      return prompt('One day make a choice', ['Red', 'Blue'], function(choice) {
+      return prompt('Please make a choice', ['Red', 'Blue'], function(choice) {
         return messageOut(function() {
           message("You selected " + choice);
           return delay(2, function() {
@@ -25846,6 +25846,10 @@ function handler(event) {
 
 // TODO - zone shit
 var isActiveZone = function() {
+  if (!document.querySelector('.zones')) {
+    return true;
+  }
+
   return window.zoneX === 1 && window.zoneY === 0;
 };
 
@@ -25892,7 +25896,7 @@ var
         return;
       }
 
-      tetris.setMessage('New game <small>Press any key to start</small>');
+      tetris.setMessage('New game<br><small>Press any key to start</small>');
 
       document.onkeydown = tetris.keyListener;
     },
@@ -26308,14 +26312,14 @@ var
 
       setTimeout(function(){
         tetris.setMessage('');
-      }, 1000);
+      }, 500);
     },
 
     doGameOver: function()
     {
       clearInterval(tetris.intval);
 
-      tetris.setMessage('Game over <br><small>Press Spacebar to continue</small>');
+      tetris.setMessage('Game over<br><small>Press Spacebar to continue</small>');
 
       tetris.gameOver = true;
     },
@@ -26355,7 +26359,7 @@ var
 
             if ( tetris.paused )
             {
-              tetris.setMessage('Paused <br><small>Press Esc to resume</small>');
+              tetris.setMessage('Paused<br><small>Press Esc to resume</small>');
             }
             else
             {

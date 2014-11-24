@@ -3,7 +3,7 @@ delay = (time, fn) ->
 
 dom = ->
   dom =
-    messagesEl: document.querySelector '.center-messages'
+    messagesEl: document.querySelector '#main-center-messages'
     clock: document.querySelector '.clock'
 
 animateLetters = (text) ->
@@ -59,10 +59,10 @@ prompt = (text, responses = ['Yes', 'No'], callback = ->) ->
 startWelcomeMessages = ->
   return unless dom.messagesEl
 
-  message 'One day'
+  message 'Welcome'
 
   delay 2, ->
-    prompt 'One day make a choice', ['Red', 'Blue'], (choice) ->
+    prompt 'Please make a choice', ['Red', 'Blue'], (choice) ->
       messageOut ->
         message "You selected #{ choice }" # TODO
 
