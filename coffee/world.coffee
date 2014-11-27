@@ -76,6 +76,17 @@ world = new World viewportElement.children[0], viewport
 window.zoneX = 0
 window.zoneY = 0
 
+window.scrollOffsetX = 0
+window.scrollOffsetY = 0
+
+snapToZoneGrid = ->
+  zoneOffsetX = Math.round(window.scrollOffsetX / window.innerWidth)
+  zoneOffsetY = Math.round(window.scrollOffsetY / window.innerHeight)
+  window.zoneX += zoneOffsetX
+  window.zoneY += zoneOffsetY
+  window.scrollOffsetX = 0
+  window.scrollOffsetY = 0
+
 document.addEventListener 'keydown', (event) ->
   return unless event.shiftKey
 
@@ -89,11 +100,14 @@ document.addEventListener 'keydown', (event) ->
     when 40
       window.zoneY += 1
 
+  if 37 <= event.keyCode <= 40
+    snapToZoneGrid()
+
   setTimeout ->
-    window.zoneX = -1 if window.zoneX < -1
-    window.zoneX = 1 if window.zoneX > 1
-    window.zoneY = -1 if window.zoneY < -1
-    window.zoneY = 1 if window.zoneY > 1
+    window.zoneX = -2 if window.zoneX < -2
+    window.zoneX = 2 if window.zoneX > 2
+    window.zoneY = -2 if window.zoneY < -2
+    window.zoneY = 2 if window.zoneY > 2
   , 100
 
 # TODO - provide API instead of assigning to window
@@ -109,6 +123,15 @@ window.addEventListener 'mousemove', (event) ->
   window.mouseX = event.x
   window.mouseY = event.y
 
+$(document).on 'mousewheel', (event, delta, deltaX, deltaY) ->
+  event.preventDefault()
+  event.stopPropagation()
+
+  window.scrollOffsetX += deltaX * 40
+  window.scrollOffsetY -= deltaY * 40
+
+  return false
+
 ease = (host, property, target, amount = 20) ->
   host[property] += (target - host[property]) / amount
 
@@ -119,7 +142,9 @@ updateCamera = ->
   cameraPositionY = ((window.innerHeight / 2 - mouseY) * .05)
 
   cameraPositionX -= window.zoneX * window.innerWidth
+  cameraPositionX -= window.scrollOffsetX
   cameraPositionY -= window.zoneY * window.innerHeight
+  cameraPositionY -= window.scrollOffsetY
 
   cameraRotationX = (mouseY - window.innerHeight / 2) * -.005
   cameraRotationY = (mouseX - window.innerWidth / 2) * -.001

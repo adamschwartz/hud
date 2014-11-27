@@ -26594,7 +26594,7 @@ var
 
 window.onload = tetris.init;
 (function() {
-  var Camera, Plane, Triplet, Viewport, World, ease, frame, paused, updateCamera, viewport, viewportElement, world;
+  var Camera, Plane, Triplet, Viewport, World, ease, frame, paused, snapToZoneGrid, updateCamera, viewport, viewportElement, world;
 
   Triplet = (function() {
     function Triplet(x, y, z) {
@@ -26696,7 +26696,22 @@ window.onload = tetris.init;
 
   window.zoneY = 0;
 
+  window.scrollOffsetX = 0;
+
+  window.scrollOffsetY = 0;
+
+  snapToZoneGrid = function() {
+    var zoneOffsetX, zoneOffsetY;
+    zoneOffsetX = Math.round(window.scrollOffsetX / window.innerWidth);
+    zoneOffsetY = Math.round(window.scrollOffsetY / window.innerHeight);
+    window.zoneX += zoneOffsetX;
+    window.zoneY += zoneOffsetY;
+    window.scrollOffsetX = 0;
+    return window.scrollOffsetY = 0;
+  };
+
   document.addEventListener('keydown', function(event) {
+    var _ref;
     if (!event.shiftKey) {
       return;
     }
@@ -26713,18 +26728,21 @@ window.onload = tetris.init;
       case 40:
         window.zoneY += 1;
     }
+    if ((37 <= (_ref = event.keyCode) && _ref <= 40)) {
+      snapToZoneGrid();
+    }
     return setTimeout(function() {
-      if (window.zoneX < -1) {
-        window.zoneX = -1;
+      if (window.zoneX < -2) {
+        window.zoneX = -2;
       }
-      if (window.zoneX > 1) {
-        window.zoneX = 1;
+      if (window.zoneX > 2) {
+        window.zoneX = 2;
       }
-      if (window.zoneY < -1) {
-        window.zoneY = -1;
+      if (window.zoneY < -2) {
+        window.zoneY = -2;
       }
-      if (window.zoneY > 1) {
-        return window.zoneY = 1;
+      if (window.zoneY > 2) {
+        return window.zoneY = 2;
       }
     }, 100);
   });
@@ -26744,6 +26762,14 @@ window.onload = tetris.init;
     return window.mouseY = event.y;
   });
 
+  $(document).on('mousewheel', function(event, delta, deltaX, deltaY) {
+    event.preventDefault();
+    event.stopPropagation();
+    window.scrollOffsetX += deltaX * 40;
+    window.scrollOffsetY -= deltaY * 40;
+    return false;
+  });
+
   ease = function(host, property, target, amount) {
     if (amount == null) {
       amount = 20;
@@ -26759,7 +26785,9 @@ window.onload = tetris.init;
     cameraPositionX = (window.innerWidth / 2 - mouseX) * .05;
     cameraPositionY = (window.innerHeight / 2 - mouseY) * .05;
     cameraPositionX -= window.zoneX * window.innerWidth;
+    cameraPositionX -= window.scrollOffsetX;
     cameraPositionY -= window.zoneY * window.innerHeight;
+    cameraPositionY -= window.scrollOffsetY;
     cameraRotationX = (mouseY - window.innerHeight / 2) * -.005;
     cameraRotationY = (mouseX - window.innerWidth / 2) * -.001;
     ease(viewport.camera.position, 'x', cameraPositionX);
