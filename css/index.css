@@ -1,5 +1,5 @@
-@import url("http://fonts.googleapis.com/css?family=Merriweather:400");
-@import url("http://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700");
+@import url("https://fonts.googleapis.com/css?family=Merriweather:400");
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700");
 article,
 aside,
 details,
@@ -1267,7 +1267,6 @@ body * {
 }
 .progress-circle {
   position: relative;
-  -webkit-border-radius: 50%;
   border-radius: 50%;
 }
 .progress-circle .ring-half-outer {
@@ -1302,7 +1301,6 @@ body * {
   bottom: 0;
   left: 0;
   border: 1em solid #52aaa2;
-  -webkit-border-radius: 50%;
   border-radius: 50%;
 }
 .progress-circle .ring-half-outer:first-child .ring-half {
@@ -2751,7 +2749,6 @@ body * {
   left: 2em;
   width: 8em;
   height: 8em;
-  -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-transform: rotateZ(-90deg) rotateX(-46deg) rotateY(24deg);
   -moz-transform: rotateZ(-90deg) rotateX(-46deg) rotateY(24deg);
@@ -2858,7 +2855,6 @@ body * {
   bottom: 0;
   left: 0;
   background: rgba(195,226,223,0.05);
-  -webkit-border-radius: 1.5em;
   border-radius: 1.5em;
   -webkit-transform: translateZ(-1em);
   -moz-transform: translateZ(-1em);
@@ -2874,7 +2870,6 @@ body * {
   bottom: 0;
   left: 0;
   border: 1px solid rgba(195,226,223,0.3);
-  -webkit-border-radius: 1.5em;
   border-radius: 1.5em;
   -webkit-box-shadow: inset 0 0 0.5em rgba(195,226,223,0.15), 0 0 0.5em rgba(195,226,223,0.15);
   box-shadow: inset 0 0 0.5em rgba(195,226,223,0.15), 0 0 0.5em rgba(195,226,223,0.15);
@@ -2887,13 +2882,11 @@ body * {
   right: 0;
   bottom: 0;
   left: 0;
-  -webkit-border-radius: 1.5em;
   border-radius: 1.5em;
 }
 .hud .border-slinky b {
   display: block;
   border: 1px solid rgba(195,226,223,0.1);
-  -webkit-border-radius: 1.5em;
   border-radius: 1.5em;
 }
 .hud .border-slinky b:nth-child(1) {
@@ -5702,7 +5695,6 @@ body * {
   margin: auto;
   height: 37.75em;
   width: 28.375em;
-  -webkit-border-radius: 1.5em 1.5em 1.5em 0;
   border-radius: 1.5em 1.5em 1.5em 0;
 }
 #tetris .tetris-brick {
@@ -5716,7 +5708,6 @@ body * {
   left: 0;
   display: block;
   border: 1px solid rgba(195,226,223,0.1);
-  -webkit-border-radius: 6.25em;
   border-radius: 6.25em;
 }
 #tetris .tetris-brick b:nth-child(2) {
@@ -5823,7 +5814,6 @@ body * {
   zoom: 1;
   border: 1px solid rgba(55,114,108,0.6);
   margin-bottom: 0.2em;
-  -webkit-border-radius: 1.5em 1.5em 1.5em 0;
   border-radius: 1.5em 1.5em 1.5em 0;
 }
 #tetris #tetris-wrap-inner:before,
@@ -5851,7 +5841,6 @@ body * {
 }
 #tetris #tetris-side {
   background: rgba(55,114,108,0.2);
-  -webkit-border-radius: 0 1.5em 1.5em 0;
   border-radius: 0 1.5em 1.5em 0;
   position: absolute;
   top: 0;

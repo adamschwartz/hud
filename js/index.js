@@ -25649,199 +25649,6 @@ function handler(event) {
 
 })(jQuery);
 
-(function() {
-  var animateLetters, delay, dom, init, message, messageOut, prompt, startClock, startDraggableWindows, startWelcomeMessages, uiText;
-
-  delay = function(time, fn) {
-    return setTimeout(fn, time * 1000);
-  };
-
-  dom = function() {
-    return dom = {
-      messagesEl: document.querySelector('#main-center-messages'),
-      clock: document.querySelector('.clock')
-    };
-  };
-
-  animateLetters = function(text) {
-    return "<div class=\"animate-letters\"><span>" + (text.split('').join('</span><span>')) + "</span></div>";
-  };
-
-  uiText = function(text) {
-    return "<div class=\"ui-text\">" + text + "</div>";
-  };
-
-  message = function(text) {
-    return dom.messagesEl.innerHTML = "<div class=\"center-message\">\n  <div class=\"content\">\n    " + (uiText(animateLetters(text))) + "\n  </div>\n</div>";
-  };
-
-  messageOut = function(next) {
-    var lastMessage;
-    lastMessage = dom.messagesEl.querySelector('.center-message');
-    if (lastMessage != null) {
-      lastMessage.classList.add('animate-blur-out');
-      return delay(1.05, function() {
-        return next();
-      });
-    } else {
-      return next();
-    }
-  };
-
-  prompt = function(text, responses, callback) {
-    if (responses == null) {
-      responses = ['Yes', 'No'];
-    }
-    if (callback == null) {
-      callback = function() {};
-    }
-    return messageOut(function() {
-      message(text);
-      dom.messagesEl.querySelector('.content').insertAdjacentHTML('beforeend', "<div class=\"buttons\" style=\"opacity: 0; pointer-events: none\"><div class=\"button\">" + (uiText('&nbsp;')) + "</div></div>");
-      return delay(text.length * .05, function() {
-        var buttons, html, i, response, _i, _j, _len, _len1, _ref, _results;
-        buttons = dom.messagesEl.querySelector('.buttons');
-        if ((_ref = buttons.parentNode) != null) {
-          _ref.removeChild(buttons);
-        }
-        html = '<div class="buttons">';
-        for (_i = 0, _len = responses.length; _i < _len; _i++) {
-          response = responses[_i];
-          html += "<a tabindex=\"0\" class=\"button animate-fade-in animate-in-dominos\">" + (uiText(animateLetters(response))) + "</a>";
-        }
-        html += '</div>';
-        dom.messagesEl.querySelector('.content').insertAdjacentHTML('beforeend', html);
-        _results = [];
-        for (i = _j = 0, _len1 = responses.length; _j < _len1; i = ++_j) {
-          response = responses[i];
-          _results.push((function(response, i) {
-            return dom.messagesEl.querySelector(".buttons a.button:nth-child(" + (i + 1) + ")").addEventListener('mousedown', function(event) {
-              return callback(response);
-            });
-          })(response, i));
-        }
-        return _results;
-      });
-    });
-  };
-
-  startWelcomeMessages = function() {
-    if (!dom.messagesEl) {
-      return;
-    }
-    message('Welcome');
-    return delay(2, function() {
-      return prompt('Please make a choice', ['Red', 'Blue'], function(choice) {
-        return messageOut(function() {
-          message("You selected " + choice);
-          return delay(2, function() {
-            messageOut(function() {
-              return message("Personalizing...");
-            });
-            return delay(2, function() {
-              return messageOut(function() {
-                message('');
-                return startClock();
-              });
-            });
-          });
-        });
-      });
-    });
-  };
-
-  startClock = function() {
-    if (!dom.clock) {
-      return;
-    }
-    return setInterval(function() {
-      dom.clock.querySelector('.seconds').setAttribute('data-progress', Math.floor((new Date()).getSeconds() * (100 / 60)));
-      dom.clock.querySelector('.minutes').setAttribute('data-progress', Math.floor((new Date()).getMinutes() * (100 / 60)));
-      return dom.clock.querySelector('.hours').setAttribute('data-progress', Math.floor(((new Date()).getHours() % 12) * (100 / 12)));
-    });
-  };
-
-  startDraggableWindows = function() {
-    var nonCollidingDepth, urls, windowAtDepth, zIndexFromDepth;
-    windowAtDepth = function(z) {
-      var found;
-      found = false;
-      $('.world .window').each(function() {
-        if (parseInt($(this).data('z'), 10) === z) {
-          return found = true;
-        }
-      });
-      return found;
-    };
-    nonCollidingDepth = function(z) {
-      if (z < -40) {
-        z = -40;
-      }
-      if (z > 15) {
-        z = 15;
-      }
-      while (windowAtDepth(z)) {
-        z += 1;
-      }
-      return z;
-    };
-    zIndexFromDepth = function(z) {
-      var zIndex;
-      return zIndex = parseInt(1000 + z);
-    };
-    urls = ['http://mit.edu', 'http://duckduckgo.com', 'http://adamschwartz.co'];
-    return $(window).dblclick(function(event) {
-      var size, url, win, z;
-      size = 600;
-      url = urls[Math.floor(Math.random() * urls.length)];
-      win = $("<div class=\"window\"><div class=\"bar\"></div><iframe src=\"" + url + "\"></iframe></div>").css({
-        left: event.clientX - (size / 2),
-        top: event.clientY - (size / 2),
-        width: size,
-        height: size
-      });
-      win.draggable();
-      win.resizable();
-      z = nonCollidingDepth(-5);
-      win.data('z', z);
-      win.css({
-        '-webkit-transform': "translateZ(" + (win.data('z')) + "em)",
-        'z-index': zIndexFromDepth(z)
-      });
-      win.on('mousewheel', function(event, delta) {
-        event.preventDefault();
-        event.stopPropagation();
-        z = parseFloat(win.data('z'));
-        z = z + delta;
-        z = nonCollidingDepth(z);
-        win.data('z', z);
-        win.css({
-          '-webkit-animation': 'none',
-          'opacity': 1,
-          '-webkit-transform': "translateZ(" + (win.data('z')) + "em)",
-          'z-index': zIndexFromDepth(z)
-        });
-        setWindowInteractable(win);
-        return false;
-      });
-      $('.world').append(win);
-      return false;
-    });
-  };
-
-  init = function() {
-    dom();
-    startWelcomeMessages();
-    startClock();
-    return startDraggableWindows();
-  };
-
-  document.addEventListener('DOMContentLoaded', function() {
-    return init();
-  });
-
-}).call(this);
-
 // From http://alias.io/tetris/
 
 // TODO - zone shit
@@ -26594,6 +26401,199 @@ var
 
 window.onload = tetris.init;
 (function() {
+  var animateLetters, delay, dom, init, message, messageOut, prompt, startClock, startDraggableWindows, startWelcomeMessages, uiText;
+
+  delay = function(time, fn) {
+    return setTimeout(fn, time * 1000);
+  };
+
+  dom = function() {
+    return dom = {
+      messagesEl: document.querySelector('#main-center-messages'),
+      clock: document.querySelector('.clock')
+    };
+  };
+
+  animateLetters = function(text) {
+    return "<div class=\"animate-letters\"><span>" + (text.split('').join('</span><span>')) + "</span></div>";
+  };
+
+  uiText = function(text) {
+    return "<div class=\"ui-text\">" + text + "</div>";
+  };
+
+  message = function(text) {
+    return dom.messagesEl.innerHTML = "<div class=\"center-message\">\n  <div class=\"content\">\n    " + (uiText(animateLetters(text))) + "\n  </div>\n</div>";
+  };
+
+  messageOut = function(next) {
+    var lastMessage;
+    lastMessage = dom.messagesEl.querySelector('.center-message');
+    if (lastMessage != null) {
+      lastMessage.classList.add('animate-blur-out');
+      return delay(1.05, function() {
+        return next();
+      });
+    } else {
+      return next();
+    }
+  };
+
+  prompt = function(text, responses, callback) {
+    if (responses == null) {
+      responses = ['Yes', 'No'];
+    }
+    if (callback == null) {
+      callback = function() {};
+    }
+    return messageOut(function() {
+      message(text);
+      dom.messagesEl.querySelector('.content').insertAdjacentHTML('beforeend', "<div class=\"buttons\" style=\"opacity: 0; pointer-events: none\"><div class=\"button\">" + (uiText('&nbsp;')) + "</div></div>");
+      return delay(text.length * .05, function() {
+        var buttons, html, i, j, k, len, len1, ref, response, results;
+        buttons = dom.messagesEl.querySelector('.buttons');
+        if ((ref = buttons.parentNode) != null) {
+          ref.removeChild(buttons);
+        }
+        html = '<div class="buttons">';
+        for (j = 0, len = responses.length; j < len; j++) {
+          response = responses[j];
+          html += "<a tabindex=\"0\" class=\"button animate-fade-in animate-in-dominos\">" + (uiText(animateLetters(response))) + "</a>";
+        }
+        html += '</div>';
+        dom.messagesEl.querySelector('.content').insertAdjacentHTML('beforeend', html);
+        results = [];
+        for (i = k = 0, len1 = responses.length; k < len1; i = ++k) {
+          response = responses[i];
+          results.push((function(response, i) {
+            return dom.messagesEl.querySelector(".buttons a.button:nth-child(" + (i + 1) + ")").addEventListener('mousedown', function(event) {
+              return callback(response);
+            });
+          })(response, i));
+        }
+        return results;
+      });
+    });
+  };
+
+  startWelcomeMessages = function() {
+    if (!dom.messagesEl) {
+      return;
+    }
+    message('Welcome');
+    return delay(2, function() {
+      return prompt('Please make a choice', ['Red', 'Blue'], function(choice) {
+        return messageOut(function() {
+          message("You selected " + choice);
+          return delay(2, function() {
+            messageOut(function() {
+              return message("Personalizing...");
+            });
+            return delay(2, function() {
+              return messageOut(function() {
+                message('');
+                return startClock();
+              });
+            });
+          });
+        });
+      });
+    });
+  };
+
+  startClock = function() {
+    if (!dom.clock) {
+      return;
+    }
+    return setInterval(function() {
+      dom.clock.querySelector('.seconds').setAttribute('data-progress', Math.floor((new Date()).getSeconds() * (100 / 60)));
+      dom.clock.querySelector('.minutes').setAttribute('data-progress', Math.floor((new Date()).getMinutes() * (100 / 60)));
+      return dom.clock.querySelector('.hours').setAttribute('data-progress', Math.floor(((new Date()).getHours() % 12) * (100 / 12)));
+    });
+  };
+
+  startDraggableWindows = function() {
+    var nonCollidingDepth, urls, windowAtDepth, zIndexFromDepth;
+    windowAtDepth = function(z) {
+      var found;
+      found = false;
+      $('.world .window').each(function() {
+        if (parseInt($(this).data('z'), 10) === z) {
+          return found = true;
+        }
+      });
+      return found;
+    };
+    nonCollidingDepth = function(z) {
+      if (z < -40) {
+        z = -40;
+      }
+      if (z > 15) {
+        z = 15;
+      }
+      while (windowAtDepth(z)) {
+        z += 1;
+      }
+      return z;
+    };
+    zIndexFromDepth = function(z) {
+      var zIndex;
+      return zIndex = parseInt(1000 + z);
+    };
+    urls = ['http://mit.edu', 'http://duckduckgo.com', 'http://adamschwartz.co'];
+    return $(window).dblclick(function(event) {
+      var size, url, win, z;
+      size = 600;
+      url = urls[Math.floor(Math.random() * urls.length)];
+      win = $("<div class=\"window\"><div class=\"bar\"></div><iframe src=\"" + url + "\"></iframe></div>").css({
+        left: event.clientX - (size / 2),
+        top: event.clientY - (size / 2),
+        width: size,
+        height: size
+      });
+      win.draggable();
+      win.resizable();
+      z = nonCollidingDepth(-5);
+      win.data('z', z);
+      win.css({
+        '-webkit-transform': "translateZ(" + (win.data('z')) + "em)",
+        'z-index': zIndexFromDepth(z)
+      });
+      win.on('mousewheel', function(event, delta) {
+        event.preventDefault();
+        event.stopPropagation();
+        z = parseFloat(win.data('z'));
+        z = z + delta;
+        z = nonCollidingDepth(z);
+        win.data('z', z);
+        win.css({
+          '-webkit-animation': 'none',
+          'opacity': 1,
+          '-webkit-transform': "translateZ(" + (win.data('z')) + "em)",
+          'z-index': zIndexFromDepth(z)
+        });
+        setWindowInteractable(win);
+        return false;
+      });
+      $('.world').append(win);
+      return false;
+    });
+  };
+
+  init = function() {
+    dom();
+    startWelcomeMessages();
+    startClock();
+    return startDraggableWindows();
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    return init();
+  });
+
+}).call(this);
+
+(function() {
   var Camera, Plane, Triplet, Viewport, World, ease, frame, paused, snapToZoneGrid, updateCamera, viewport, viewportElement, world;
 
   Triplet = (function() {
@@ -26640,8 +26640,8 @@ window.onload = tetris.init;
     }
 
     Camera.prototype.update = function() {
-      var _ref;
-      return (_ref = this.world) != null ? _ref.node.style.cssText = CSSUtils.originCentered(-this.position.x, -this.position.y, -this.position.z) + CSSUtils.translate(this.position.x, this.position.y, this.fov, this.rotation.x, this.rotation.y, this.rotation.z) : void 0;
+      var ref;
+      return (ref = this.world) != null ? ref.node.style.cssText = CSSUtils.originCentered(-this.position.x, -this.position.y, -this.position.z) + CSSUtils.translate(this.position.x, this.position.y, this.fov, this.rotation.x, this.rotation.y, this.rotation.z) : void 0;
     };
 
     return Camera;
@@ -26711,7 +26711,7 @@ window.onload = tetris.init;
   };
 
   document.addEventListener('keydown', function(event) {
-    var _ref;
+    var ref;
     if (!event.shiftKey) {
       return;
     }
@@ -26728,7 +26728,7 @@ window.onload = tetris.init;
       case 40:
         window.zoneY += 1;
     }
-    if ((37 <= (_ref = event.keyCode) && _ref <= 40)) {
+    if ((37 <= (ref = event.keyCode) && ref <= 40)) {
       snapToZoneGrid();
     }
     return setTimeout(function() {

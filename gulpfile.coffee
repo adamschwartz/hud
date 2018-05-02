@@ -1,20 +1,15 @@
-bower      = require 'gulp-bower'
-browserify = require 'browserify'
-buffer     = require 'gulp-buffer'
 coffee     = require 'gulp-coffee'
-concat     = require 'gulp-concat'
-fs         = require 'fs'
-gulp       = require 'gulp'
-gulpif     = require 'gulp-if'
-gutil      = require 'gulp-util'
-jade       = require 'gulp-jade'
-nib        = require 'nib'
-Path       = require 'path'
-rename     = require 'gulp-rename'
-replace    = require 'gulp-replace'
-source     = require 'vinyl-source-stream'
-stylus     = require 'gulp-stylus'
-uglify     = require 'gulp-uglify'
+concat  = require 'gulp-concat'
+fs      = require 'fs'
+gulp    = require 'gulp'
+gulpif  = require 'gulp-if'
+coffee  = require 'gulp-coffee'
+gutil   = require 'gulp-util'
+jade    = require 'gulp-jade'
+nib     = require 'nib'
+Path    = require 'path'
+rename  = require 'gulp-rename'
+stylus  = require 'gulp-stylus'
 
 handleError = (err) ->
   gutil.log err
@@ -22,17 +17,18 @@ handleError = (err) ->
 
   @emit 'end'
 
+
 STYLUS_OPTS =
   use: [nib()]
   errors: true
-  paths: [
-    __dirname
-    Path.join(__dirname, 'bower_components')
-  ]
+  paths: [__dirname]
+
+isCoffeeFile = (file) ->
+  return true if file.path.match(/\.coffee$/)
 
 gulp.task 'js', ->
-  gulp.src(['./coffee/**'])
-    .pipe(gulpif(/[.]coffee$/, coffee().on('error', handleError)))
+  gulp.src(['./coffee/*.js', './coffee/*.coffee'])
+    .pipe(gulpif(isCoffeeFile, coffee().on('error', handleError)))
     .pipe(concat('index.js'))
     .pipe(gulp.dest('./js'))
 
